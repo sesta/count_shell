@@ -1,20 +1,42 @@
 #!/bin/sh
 
-if [ "$1" = "" ] ; then
-  echo no argument
-else
-  start_time=`date +%s`
-  now_time=$start_time
-  space='      '
+SPACE='      '
+START_TIME=`date +%s`
+seconds=0
 
-  while [ $1 -ne $(( now_time - start_time )) ] ; do
+while getopts as:m:h: OPT ; do
+  case $OPT in
+    "a" )
+      alert="\a"
+      ;;
+    "s" )
+      seconds="$(( seconds + OPTARG ))"
+      ;;
+    "m" )
+      seconds="$(( seconds + OPTARG * 60 ))"
+      ;;
+    "h" )
+      seconds="$(( seconds + OPTARG * 60 * 60 ))"
+      ;;
+  esac
+done
+
+if [ $seconds -ne 0 ] ; then
+  now_time=$START_TIME
+
+  while [ $seconds -ne $(( now_time - START_TIME )) ] ; do
     now_time=`date +%s`
-
-    echo " $space\r\c"
-    echo " $(( $1 + start_time - now_time ))\r\c"
+    echo " $SPACE\r\c"
+    echo " $(( seconds + START_TIME - now_time ))\r\c"
   done
 
   echo Finish!
-  echo '\a\r\c'
+  echo "$alert\r\c"
+else
+  while true ; do
+    now_time=`date +%s`
+    echo " $SPACE\r\c"
+    echo " $(( now_time - START_TIME ))\r\c"
+  done
 fi
 
