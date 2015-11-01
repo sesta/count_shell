@@ -15,5 +15,6 @@ else
   done
 
   echo Finish!
+  echo '\a\r\c'
 fi
 
