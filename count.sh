@@ -71,7 +71,8 @@ if [ $seconds -ne 0 ] ; then
     now_time=`date +%s`
   done
 
-  echo Finish!
+  echo "    $SPACE\r\c"
+  echo "    Finish!"
   echo "$alert\r\c"
 else
   while true ; do
