@@ -24,19 +24,25 @@ done
 if [ $seconds -ne 0 ] ; then
   now_time=$START_TIME
 
-  while [ $seconds -ne $(( now_time - START_TIME )) ] ; do
-    now_time=`date +%s`
+  while [ $seconds -gt $(( now_time - START_TIME )) ] ; do
     echo " $SPACE\r\c"
     echo " $(( seconds + START_TIME - now_time ))\r\c"
+
+    sleep 1s
+
+    now_time=`date +%s`
   done
 
   echo Finish!
   echo "$alert\r\c"
 else
   while true ; do
-    now_time=`date +%s`
     echo " $SPACE\r\c"
     echo " $(( now_time - START_TIME ))\r\c"
+
+    sleep 1s
+
+    now_time=`date +%s`
   done
 fi
 
