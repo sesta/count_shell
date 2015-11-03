@@ -48,17 +48,14 @@ while getopts as:m:h:t: OPT ; do
       seconds="$(( seconds + OPTARG * 60 * 60 ))"
       ;;
     "t" )
-      h=`echo "$OPTARG" | sed -e "s/[0-9]*m//g"`
-      h=`echo "$h" | sed -e "s/[0-9]*s//g"`
-      h=`echo "$h" | sed -e "s/h//g"`
-      m=`echo "$OPTARG" | sed -e "s/[0-9]*h//g"`
-      m=`echo "$m" | sed -e "s/[0-9]*s//g"`
-      m=`echo "$m" | sed -e "s/m//g"`
-      s=`echo "$OPTARG" | sed -e "s/[0-9]*h//g"`
-      s=`echo "$s" | sed -e "s/[0-9]*m//g"`
-      s=`echo "$s" | sed -e "s/s//g"`
-        # TODO: もっとちゃんと正規表現する
+      h=`echo "$OPTARG" | sed -E "s/[0-9]+[ms]//g"`
+      h=`echo "$h" | sed -E "s/h//g"`
+      m=`echo "$OPTARG" | sed -E "s/[0-9]+[hs]//g"`
+      m=`echo "$m" | sed -E "s/m//g"`
+      s=`echo "$OPTARG" | sed -E "s/[0-9]+[hm]//g"`
+      s=`echo "$s" | sed -E "s/s//g"`
       seconds="$(( seconds + ( h * 60 + m ) * 60 + s ))"
+      ;;
   esac
 done
 
