@@ -31,7 +31,7 @@ function echoTime(){
     s_space=''
   fi
 
-  echo "$(tput cuu1)$(tput cuu1)\n$space$h_space$h:$m_space$m:$s_space$s$space\n\c"
+  echo "\n$space$h_space$h:$m_space$m:$s_space$s$space\n"
 }
 
 function makeSpace(){
@@ -42,6 +42,12 @@ function makeSpace(){
     space=" $space"
   done
   echo "$space"
+}
+
+function cursorUp(){
+  for i in `seq 1 1 $1` ; do
+    echo "$(tput cuu1)\c"
+  done
 }
 
 while getopts as:m:h:t: OPT ; do
@@ -71,8 +77,9 @@ while getopts as:m:h:t: OPT ; do
 done
 
 if [ $seconds -ne 0 ] ; then
-  echo "\n\n\c"
+  echo "\n\n"
   while [ $seconds -gt $(( now_time - START_TIME )) ] ; do
+    cursorUp 3
     echoTime $(( seconds + START_TIME - now_time ))
 
     sleep 1s
@@ -80,11 +87,13 @@ if [ $seconds -ne 0 ] ; then
     now_time=`date +%s`
   done
 
-  echo "$(tput cuu1)$(tput cuu1)\n$space Finish! $space\n\c"
-  echo "$alert\c"
+  cursorUp 3
+  echo "\n$space Finish! $space"
+  echo "$alert"
 else
-  echo "\n\n\c"
+  echo "\n\n"
   while true ; do
+    cursorUp 3
     echoTime $(( now_time - START_TIME ))
 
     sleep 1s
