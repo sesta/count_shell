@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SPACE='                 '
+SPACE='     '
 START_TIME=`date +%s`
 now_time=$START_TIME
 seconds=0
@@ -29,8 +29,7 @@ function echoTime() {
     s_space=''
   fi
 
-  echo "    $SPACE\r\c"
-  echo "    $h_space$h:$m_space$m:$s_space$s\r\c"
+  echo "$SPACE$h_space$h:$m_space$m:$s_space$s$SPACE\r\c"
 }
 
 while getopts as:m:h:t: OPT ; do
@@ -68,8 +67,7 @@ if [ $seconds -ne 0 ] ; then
     now_time=`date +%s`
   done
 
-  echo "    $SPACE\r\c"
-  echo "    Finish!"
+  echo "$SPACE Finish! $SPACE"
   echo "$alert\r\c"
 else
   while true ; do
