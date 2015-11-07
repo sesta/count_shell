@@ -1,11 +1,13 @@
 #!/bin/sh
 
-SPACE='     '
 START_TIME=`date +%s`
 now_time=$START_TIME
 seconds=0
 
-function echoTime() {
+function echoTime(){
+  cols=`tput cols`
+  space=`makeSpace $(( ( cols - 9 )  / 2 ))`
+
   s=$1
   m=$(( ( s / 60 ) % 60 ))
   h=$(( s / 60 / 60 ))
@@ -29,7 +31,17 @@ function echoTime() {
     s_space=''
   fi
 
-  echo "$SPACE$h_space$h:$m_space$m:$s_space$s$SPACE\r\c"
+  echo "$(tput cuu1)$(tput cuu1)\n$space$h_space$h:$m_space$m:$s_space$s$space\n\c"
+}
+
+function makeSpace(){
+  space_length=$1
+  space=""
+
+  for i in `seq 1 1 $space_length` ; do
+    space=" $space"
+  done
+  echo "$space"
 }
 
 while getopts as:m:h:t: OPT ; do
@@ -59,6 +71,7 @@ while getopts as:m:h:t: OPT ; do
 done
 
 if [ $seconds -ne 0 ] ; then
+  echo "\n\n\c"
   while [ $seconds -gt $(( now_time - START_TIME )) ] ; do
     echoTime $(( seconds + START_TIME - now_time ))
 
@@ -67,9 +80,10 @@ if [ $seconds -ne 0 ] ; then
     now_time=`date +%s`
   done
 
-  echo "$SPACE Finish! $SPACE"
-  echo "$alert\r\c"
+  echo "$(tput cuu1)$(tput cuu1)\n$space Finish! $space\n\c"
+  echo "$alert\c"
 else
+  echo "\n\n\c"
   while true ; do
     echoTime $(( now_time - START_TIME ))
 
