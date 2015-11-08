@@ -88,8 +88,7 @@ if [ $seconds -ne 0 ] ; then
   done
 
   cursorUp 3
-  echo "\n$space Finish! $space"
-  echo "$alert"
+  echo "\n$space Finish! $space\n$alert"
 else
   echo "\n\n"
   while true ; do
