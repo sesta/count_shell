@@ -117,7 +117,7 @@ if [ $seconds -ne 0 ] ; then
   echo "$space 88888     88    888888    88    888888   888888    88"
   echo "$space 88        88    88 888    88        88   88  88      "
   echo "$space 88       8888   88  88   8888   888888   88  88    88"
-  echo ""
+  echo "\a"
 else
   echo "\n\n\n\n\n\n"
   while true ; do
