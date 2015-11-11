@@ -33,3 +33,7 @@ Count Up と Count Down ができる
 ```
 # ./count.sh -t 1s -a
 ```
+
+
+## License
+MIT
