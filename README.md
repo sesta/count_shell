@@ -9,6 +9,8 @@ Count Up と Count Down ができる
 ```
 # count
 ```
+![count_up](https://cloud.githubusercontent.com/assets/8287121/11087667/98e93304-889f-11e5-8fe4-346a15f2c5de.gif)
+
 `Ctrl-c` で止めてね
 
 
