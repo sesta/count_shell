@@ -107,8 +107,17 @@ if [ $seconds -ne 0 ] ; then
     now_time=`date +%s`
   done
 
+  cols=`tput cols`
+  space=`makeSpace $(( ( cols - 54 )  / 2 ))`
+
   cursorUp 7
-  echo "\n$space Finish! $space\n$alert"
+  echo ""
+  echo "$space 888888   8888   88  88   8888   888888   88  88    88"
+  echo "$space 88        88    888 88    88    88       88  88    88"
+  echo "$space 88888     88    888888    88    888888   888888    88"
+  echo "$space 88        88    88 888    88        88   88  88      "
+  echo "$space 88       8888   88  88   8888   888888   88  88    88"
+  echo ""
 else
   echo "\n\n\n\n\n\n"
   while true ; do
