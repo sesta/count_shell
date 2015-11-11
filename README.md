@@ -19,6 +19,9 @@ Count Up と Count Down ができる
 ```
 # count -t 3m
 ```
+![count_down](https://cloud.githubusercontent.com/assets/8287121/11087835/f051418a-88a0-11e5-92e0-7ec5e20c2c25.gif)
+
+
 * hour  を指定:  `-h 1 ` 
 * minuteを指定:  `-m 2 ` 
 * secondを指定:  `-s 3 `
